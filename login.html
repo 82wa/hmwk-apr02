@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ログイン画面</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+        section {
+          background: #D9695F;
+          color: white;
+          border-radius: 1em;
+          padding: 1em;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-right: -50%;
+          transform: translate(-50%, -50%) }
+  </style>
+</head>
+<body>
+  <section>
+  <form action="login.php" method="get">
+    <label for="user_id">ユーザーID：</label>
+    <input type="text" name="user_id">
+    <p></p>
+
+    <label for="password">パスワード：</label>
+    <input type="password" name="password">
+    <p></p>
+    <!-- permissionは権限を指定する -->
+    <input type="hidden" name="permission" value="0">
+    <!-- startはproductsの開始行を指定するための変数 -->
+    <input type="hidden" name="start" value="0">
+
+    <span style="float: right">
+    <input type="submit" name="submitBtn" value="ログイン">
+    </span>
+  </form>
+</section>
+
+</body>
+</html>
