@@ -4,15 +4,13 @@
   $user_name = $_GET["user_name"];
   $start = $_GET["start"];
   $permission = $_GET["permission"];
-  $order_user = $_GET["user_id"];
+  $order_user = $_GET["order_user"];
   $pri_key = $_GET["pri_key"];
-
-  //なぜか書かないと上手くいく遷移前の変数たち　actionではなくrequire_once経由だから？？？
   $book_title = $_GET["book_title"];
   $book_type = $_GET["book_type"];
   $book_price = $_GET["book_price"];
   $order_status = $_GET["order_status"];
-  $order_date = $_GET["order_date"];
+  $order_date = $_GET["order_date"]; 
   
 
 if (isset($_GET['updateBtn']))
@@ -39,23 +37,16 @@ try {
           $stmt->bindParam(':order_status', $order_status, PDO::PARAM_INT);
           $stmt->bindParam(':order_user', $order_user, PDO::PARAM_STR);
           $stmt->execute();
-          //echo "できてるよお";
           
           //変更後、5件だけ検索して最初のページに戻る
-          $query = 'select * from products limit :start, 5';
-          $sstmt = $pdo->prepare($query);
-          $sstmt->bindParam(':start', $start, PDO::PARAM_INT); // PDO::PARAM_INTやPDO::PARAM_STRなどtypeを指定しないとエラーになる
-          $sstmt->execute();
-          $result = $sstmt->fetchAll();
-          require_once 'viewSelect_tpl.php';
+          require_once 'Select.php';
     
 
   }
   catch (PDOException $e) {
-    //例外が発生したら無視する
-    require_once 'exception_tpl.php';
-    echo $e->getMessage();
-    exit();
+      //例外が発生したら入力しなおし
+      echo "[!] 登録できない値が入力されています";
+      require_once 'ViewUpdate_tpl.php';
  }
 }
 if (isset($_GET['deleteBtn']))
@@ -76,15 +67,9 @@ if (isset($_GET['deleteBtn']))
   $stmt = $pdo->prepare($query);
   $stmt->bindParam(':product_id', $pri_key, PDO::PARAM_INT);
   $stmt->execute();
-  //echo "消すぞー－－－！";
 
   //削除後、5件だけ検索して最初のページに戻る
-  $query = 'select * from products limit :start, 5';
-  $sstmt = $pdo->prepare($query);
-  $sstmt->bindParam(':start', $start, PDO::PARAM_INT); // PDO::PARAM_INTやPDO::PARAM_STRなどtypeを指定しないとエラーになる
-  $sstmt->execute();
-  $result = $sstmt->fetchAll();
-  require_once 'viewSelect_tpl.php';
+  require_once 'Select.php';
 
 
 }

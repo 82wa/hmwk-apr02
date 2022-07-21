@@ -4,10 +4,9 @@
   $user_name = $_GET["user_name"];
   $start = $_GET["start"];
   $permission = $_GET["permission"];
-  $order_user = $_GET["user_id"];
   $pri_key = $_GET["pri_key"];
 
-  //なぜか書かないと上手くいく遷移前の変数たち　actionではなくrequire_once経由だから？？？
+  //なぜか書かないと上手くいく遷移前の変数たち　actionではなくrequire_once経由だから…？
   //$book_title = $_GET["book_title"];
   //$book_type = $_GET["book_type"];
   //$book_price = $_GET["book_price"];
@@ -21,56 +20,15 @@
   <head>
       <meta charset="UTF-8">
       <title>update</title>
-      <link rel="stylesheet" href="style.css">
-      <style>
-          body{
-              margin: 30px 20px 30px 40px;
-          }
-          #selectView {
-              margin: 20px 0px 20px 0px;
-          }
-          .btn form {
-              display: inline-block;
-          }
-          .top {
-              margin-bottom: 30px;
-          }
-          </style>
-          <style>
-          h2 {
-              position: relative;
-              padding: 10px;
-              box-shadow: 0 0 0 7px #D9695F;
-              border: 2px dashed #40271E;
-              border-radius: 30px;
-              background-color: #D9695F;
-              color: #ffffff;
-              font-size: 16px;
-              font-weight:normal;
-              width: 400px;
-          }
-      </style>
+      <link rel="stylesheet" href="style/style.css">
       <script>
-    function confirm_form() {
-    var select = confirm("本当に実行しますか？");
-    return select;
-    }
-    </script>
+        function confirm_form() {
+        var select = confirm("本当に実行しますか？");
+        return select;
+        }
+      </script>
   </head>
   <body>
-<?php
-//echo $pri_key;
-//echo "</br>";
-//echo $book_title;
-//echo "</br>";
-//echo $book_type;
-//echo "</br>";
-//echo $book_price;
-//echo "</br>";
-//echo $order_status;
-//echo "</br>";
-//echo $order_date;
-?>
   <div class="top">
   <h2><?php echo "$user_name"; ?>さん、こんにちは（権限：<?php echo $permission; ?>, ID：<?php echo $user_id; ?>）</h2>
   </div>
@@ -78,12 +36,12 @@
   <form action="update.php" method="get" onsubmit="return confirm_form()">
           <!--name-->
           <label for="book_title">書籍名：</label>
-          <input type="text" name="book_title" value="<?php echo $book_title;?>">
+          <input type="text" name="book_title" style="width: 300px;" value="<?php echo $book_title;?>">
           <p></p>
           <!--type-->
           <label for="book_type">種別：</label>
           <select name='book_type'>
-              <option value="<?php echo $book_type;?>">ジャンル</option>    <!--ここベタ打ちだからジャンル名がかえられない　どうしようもない-->
+              <option value="<?php echo $book_type;?>">ジャンル</option>
               <option value="1">小説</option>
               <option value="2">ノンフィクション</option>
               <option value="3">漫画</option>
@@ -108,7 +66,7 @@
           <p></p>
 
           <!--order_status-->
-          <label for="order_status">ステータス：</label>
+          <label for="order_status">状態：</label>
           <input type="text" name="order_status" value="<?php echo $order_status;?>">
           <p></p>
           
@@ -117,7 +75,7 @@
           <input type="text" name="order_user" value="<?php echo $order_user;?>">
           <p></p>
       
-          <!--遷移先のphpで使うのでここではいらないんだけど書いておく-->
+          <!--遷移先のphpで使う-->
           <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
           <input type="hidden" name="user_name" value="<?php echo $user_name; ?>">
           <input type="hidden" name="start" value="<?php echo $start; ?>">

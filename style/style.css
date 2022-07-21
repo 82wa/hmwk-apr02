@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&display=swap');
+body {
+  background: #F2C5BB;
+  color: #40271E;
+  font-family: 'Shippori Mincho', serif;}
+
+
+input[type="text"] , input[type="password"]{
+    color: #40271E;
+    font-family: 'Shippori Mincho', serif;
+    height: 1.2em;
+    width: 10em;
+} 
+
+input[type="submit"] {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 15px;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 5px;
+    text-align: center;
+    background-color: #734230;
+    border: 1px solid #734230;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+/*--hover--*/
+input[type="submit"]:hover {
+      color: #734230;
+      background-color: #D9695F;
+      border: 1px solid #734230;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 1s;
+}
+
+/* 全体レイアウト等 */
+body{
+  margin: 30px 20px 30px 40px;
+}
+#selectView {
+  margin: 20px 0px 20px 0px;
+}
+.btn form {
+display: inline-block;
+}
+.top {
+  margin-bottom: 30px;
+}
+/* トップ見出し */
+h2 {
+  position: relative;
+  padding: 10px;
+  box-shadow: 0 0 0 7px #D9695F;
+  border: 2px dashed #40271E;
+  border-radius: 30px;
+  background-color: #D9695F;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight:normal;
+  width: 400px;
+  }
+  
+/* ラベルの位置の調整（フォームの隣に揃うようにする） */
+label{
+  display: inline-block;
+  text-align: right;
+  width: 80px;
+}
+
+
+    /* テーブル */
+    .tb {
+      width: 70%;
+      max-width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      border-spacing: 0;
+  }
+  .tb th,td {
+      text-align: left;  
+  }
+  .tb th {
+      padding: 10px;
+      border-bottom: solid 4px #D9695F;
+      color: #D9695F;
+  }
+  .tb td {
+      padding: 10px;
+      border-bottom: solid 1px #D9695F;
+  }

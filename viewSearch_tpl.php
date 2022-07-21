@@ -2,10 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>viewSelect_tpl</title>
+    <title>viewSearch_tpl</title>
     <link rel="stylesheet" href="style/style.css">
-    <style>
-</style>
 </head>
 <body>
   
@@ -17,7 +15,7 @@
 <div class="btn">
 <!--検索-->
 <form action="search.php" method="get">
-<input type="text" name="book_title" value="">
+<input type="text" name="book_title" value="<?php echo $book_title; ?>">
 <select name='book_type'>
     <option value="0">ジャンル</option>
     <option value="1">小説</option>
@@ -36,7 +34,7 @@
 <input type="submit" name="searchBtn" value="検索">
 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 <input type="hidden" name="user_name" value="<?php echo $user_name; ?>">
-<input type="hidden" name="start" value="<?php echo $start; ?>">
+<input type="hidden" name="start" value="0"><!--何ページか進んだ(戻った)状態で検索押しても検索結果は1ページ目から開始させる-->
 <input type="hidden" name="permission" value="<?php echo $permission; ?>">
 <!--ボタンを押してbook_typeやbook_titleの中身(？)が生まれるのでこの時点で<input type=hidden～は書かない-->
 </form>
@@ -71,8 +69,8 @@ echo ">";?>
      <th width="10px"></th>
      <th width="1000px">書籍名</th>
      <th width="250px">ジャンル</th>
-     <th width="100px">価格</th>
-     <th width="150px">ステータス</th>
+     <th width="200px">価格</th>
+     <th width="200px">ステータス</th>
      <th width="200px">登録日</th>
      <th width="200px">登録者</th>
    </tr>
@@ -116,27 +114,32 @@ echo ">";?>
 </form>
 
 <!--次のページ-->
-<form action="select.php" method="get">     <!-- select.phpのところが＄_GETなのでmethodもgetとする -->
+<form action="search.php" method="get">
 <input type="submit" name="nextBtn" value="次へ">
 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 <input type="hidden" name="permission" value="<?php echo $permission; ?>">
 <input type="hidden" name="user_name" value="<?php echo $user_name; ?>">
-<input type="hidden" name="start" value="<?php echo $start+5; ?>">  <!--　※いつかやりたい…+5だと無限に進んでしまうのでmaxで最大値取った方が良い気がする-->
+<input type="hidden" name="start" value="<?php echo $start+5; ?>">
+<!--検索条件の保持-->
+<input type="hidden" name="book_title" value="<?php echo $book_title; ?>">
+<input type="hidden" name="book_type" value="<?php echo $book_type; ?>">
 </form>
 
 <!--前のページ-->
-<form action="select.php" method="get">     <!-- select.phpのところが＄_GETなのでmethodもgetとする -->
+<form action="search.php" method="get">
 <input type="submit" name="previousBtn" value="前へ">
 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 <input type="hidden" name="permission" value="<?php echo $permission; ?>">
 <input type="hidden" name="user_name" value="<?php echo $user_name; ?>">
+<!--検索条件の保持-->
+<input type="hidden" name="book_title" value="<?php echo $book_title; ?>">
+<input type="hidden" name="book_type" value="<?php echo $book_type; ?>">
 <!--前に戻りすぎない用のif-->
 <?php                                                               
 if ($start != 0) {$start -= 5;}
 ?>
 <input type="hidden" name="start" value="<?php echo $start; ?>">
 </form>
-
 </div>
 
 </body>

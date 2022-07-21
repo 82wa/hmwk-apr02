@@ -12,7 +12,12 @@
   $order_date = time() ;
   $order_date = date( "Y-m-d" , $order_date );
 
-  try {
+  if($book_type == 0 || empty($book_title) || empty($book_price)) {
+    echo "[!] 登録情報に空欄があります。";
+    require_once 'ViewAdd_tpl.php';
+  }else {
+
+    try {
     // データベースに接続
     $pdo = new PDO(
     // ホスト名、データベース名
@@ -25,7 +30,8 @@
     [ PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ]
     );
           
-          $query = 'INSERT INTO products(product_id, type, name, price, order_date, order_status, order_user) VALUES(0, :type, :name, :price, :order_date, :order_status, :order_user)';
+          $query = 'INSERT INTO products(product_id, type, name, price, order_date, order_status, order_user)
+          VALUES(0, :type, :name, :price, :order_date, :order_status, :order_user)';
           $stmt = $pdo->prepare($query);
           $stmt->bindParam(':type', $book_type, PDO::PARAM_INT);
           $stmt->bindParam(':name', $book_title, PDO::PARAM_STR);
@@ -36,12 +42,7 @@
           $stmt->execute();
           
           //挿入後、5件だけ検索して最初のページに戻る
-          $query = 'select * from products limit :start, 5';
-          $sstmt = $pdo->prepare($query);
-          $sstmt->bindParam(':start', $start, PDO::PARAM_INT); // PDO::PARAM_INTやPDO::PARAM_STRなどtypeを指定しないとエラーになる
-          $sstmt->execute();
-          $result = $sstmt->fetchAll();
-          require_once 'viewSelect_tpl.php';
+          require_once 'Select.php';
       
   
     }
@@ -51,6 +52,7 @@
       echo $e->getMessage();
       exit();
    }
+  }
   
   ?>
   

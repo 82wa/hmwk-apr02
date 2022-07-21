@@ -13,35 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>add</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body{
-            margin: 30px 20px 30px 40px;
-        }
-        #selectView {
-            margin: 20px 0px 20px 0px;
-        }
-        .btn form {
-            display: inline-block;
-        }
-        .top {
-            margin-bottom: 30px;
-        }
-        </style>
-        <style>
-        h2 {
-            position: relative;
-            padding: 10px;
-            box-shadow: 0 0 0 7px #D9695F;
-            border: 2px dashed #40271E;
-            border-radius: 30px;
-            background-color: #D9695F;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight:normal;
-            width: 400px;
-        }
-    </style>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 <div class="top">
@@ -51,7 +23,7 @@
 <form action="add.php" method="get">
         <!--name-->
         <label for="book_type">書籍名：</label>
-        <input type="text" name="book_title">
+        <input type="text" name="book_title" style="width: 300px;">
         <p></p>
         <!--type-->
         <label for="book_type">種別：</label>
@@ -92,5 +64,6 @@
 
         <input type="submit" name="addBtn" value="追加">
     </form>
+    
 </body>
 </html>

@@ -6,6 +6,7 @@
   $password = $_GET["password"];
   $start = $_GET["start"];
   $permission = $_GET["permission"];
+  
 try {
   // データベースに接続
   $pdo = new PDO(
@@ -37,10 +38,27 @@ try {
     if(empty($result)){
         require_once 'login.html';
     } else {
-        $user_name = $result[0]["name"];
+        $user_name = $result[0]["user_name"];
         $permission = $result[0]["permission"];
         //5件だけ検索
-        $query = 'select * from products limit :start, 5';
+        $query = 'select
+        product_id,
+        name as product_name,
+        ty.type_name,
+        price,
+        order_date,
+        stat.status,
+        usr.user_name
+        from
+        products as prod
+        inner join status as stat 
+        on prod.order_status = stat.status_id
+        inner join type as ty
+        on prod.type = ty.type_id
+        inner join user as usr
+        on prod.order_user = usr.user_id
+        order by prod.product_id desc
+        limit :start, 5';
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':start', $start, PDO::PARAM_INT); // PDO::PARAM_INTやPDO::PARAM_STRなどtypeを指定しないとエラーになる
         $stmt->execute();
